@@ -1,0 +1,21 @@
+---
+title: "Class Excercise 2"
+author: "Miguel Corredera Payo (14-533-079), Patrick Stöckli (14-103-675), Tobias
+  Hoesli (17-494-659)"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: TRUE
+  pdf_document:
+    extra_dependencies: subfig
+urlcolor: blue
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+## Introduction
+
