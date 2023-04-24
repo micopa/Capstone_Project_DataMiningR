@@ -37,9 +37,20 @@ data_deaths <- tibble(
 #I want to have the Values assigned to SPAIN 
 esp_df <- filter(data_deaths, country == "ESP")
 
-
+#Try to use filter to receive filtered data for both sex
+#Error message appears
 response_filter <-  httr::GET(
-  url = "https://ghoapi.azureedge.net/api/AIR_41$filter=Dim1 eq 'BTSX'",
+  url = "https://ghoapi.azureedge.net/api/AIR_41$filter=Dim1%20eq%20%27BTSX%27",
   verbose())
 
-cnt_air41_btsx <- content(response_filter, as = "parse")
+#Try other method to use filter to receive filtered data for both sex
+#This method is stated in the documentation from GHO API 
+#Error message appears. Try to find a solution but couldn't
+response_filter <-  httr::GET(
+  url = "https://ghoapi.azureedge.net/api/WHOSIS_000001?$filter=Dim1 eq 'MLE'",
+  verbose())
+
+#finding a solution for an exact scraping so I decide to continue with the data frames provided by
+#WHO at https://platform.who.int/data/
+
+#CHATGPT was also used to find a solution but in general CHATGPT has not been a big help regarding API scrapping
