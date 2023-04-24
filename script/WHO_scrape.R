@@ -33,3 +33,13 @@ data_deaths <- tibble(
   year = map_dbl(cnt_air41$value, 6), 
   value = map_dbl(cnt_air41$value, ~(.x)$NumericValue)
 )
+
+#I want to have the Values assigned to SPAIN 
+esp_df <- filter(data_deaths, country == "ESP")
+
+
+response_filter <-  httr::GET(
+  url = "https://ghoapi.azureedge.net/api/AIR_41$filter=Dim1 eq 'BTSX'",
+  verbose())
+
+cnt_air41_btsx <- content(response_filter, as = "parse")
