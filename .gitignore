@@ -44,7 +44,7 @@ Data/
 credentials/
 
 #except for this one
-.gitignore
+.gitkeep
 
 #vscode gitignore
 .vscode/
