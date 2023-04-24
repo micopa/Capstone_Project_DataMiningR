@@ -43,8 +43,8 @@ vignettes/*.pdf
 Data/
 credentials/
 
-#except for this one
-.gitkeep
+#except for this one.
+!.gitkeep
 
 #vscode gitignore
 .vscode/
