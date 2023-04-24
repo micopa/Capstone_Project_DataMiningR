@@ -2,25 +2,44 @@ library(tidyverse)
 library(httr)
 library(rvest)
 library(here)
+library(purr)
 
-# Global Health Observatory - WHO
-# https://www.who.int/data/gho/info/gho-odata-api
-# Get the list with all the variables that are available (indicators)
-#  https://www.who.int/data/gho/data/indicators
-response <-  httr::GET(
-  url = 'https://ghoapi.azureedge.net/api/Indicator',
-  verbose()
+
+here::here()
+
+#WORLDBANK API
+
+#I search the WORLDBANK API for Documents regarding the topic energy and that include the term "water" in the title
+response <- httr::GET("https://search.worldbank.org/api/v2/wds?format=json&qterm=energy&display_title=water&fl=display_title")
+content_WB <- content(response, as = "parsed")
+
+#I know want to have the necessary information such as document ID, Title and the direct PDF link in a data frame
+data_WB <- tibble(
+  ID = map_chr(content_WB$documents, 1), 
+  TITLE = map_chr(content_WB$documents, 4), 
+  PDF = map_chr(content_WB$documents, 5) 
 )
 
-cnt <- content(response, as = "parsed")
-dat <- tibble(
-  code = map_chr(cnt$value, 1), 
-  name = map_chr(cnt$value, 2), 
-  language = map_chr(cnt$value, 3) 
+#the code doesn't work as it contains a sublist with 0 
+#Error in `map_chr()`:
+#i In index: 11.
+#i With name: facets.
+#Caused by error:
+  #! Result must be length 1, not 0.
+#Run `rlang::last_error()` to see where the error occurred.
+
+#I delete the sublist so I can create a data frame with the tibble function
+content_WB <- content_WB$documents[-11]
+
+# I create a data frame with ID, TITLE and PDF URL of the documents
+data_WB <- tibble(
+  ID = map_chr(content_WB, 1), 
+  TITLE = map_chr(content_WB, 4), 
+  PDF = map_chr(content_WB, 5) 
 )
 
-# Download data from one indicator (Alcohol consumption per capita): 
-dat[dat$code == "SA_0000001400",]
-response <-  httr::GET(
-  url = 'https://ghoapi.azureedge.net/api/SA_0000001400',
-  verbose()
+#I save the data frame as a CVS file
+save(data_WB, file = "energy_water_pdf.RData")
+
+
+
