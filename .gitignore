@@ -39,8 +39,8 @@ vignettes/*.pdf
 .Renviron
 
 
-#Ignore the credentials folder...
-Data/
+#Ignore the data and credentials folder...
+data/
 credentials/
 
 #except for this one.
