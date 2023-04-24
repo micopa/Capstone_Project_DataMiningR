@@ -39,8 +39,12 @@ vignettes/*.pdf
 .Renviron
 
 
-#Ignore the credentials folder
+#Ignore the credentials folder...
+Data/
 credentials/
+
+#except for this one
+!.gitignore
 
 #vscode gitignore
 .vscode/
