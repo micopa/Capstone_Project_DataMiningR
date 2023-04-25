@@ -12,8 +12,8 @@ install.packages("ggjoy")
 install.packages("spotifyr")
 
 #set system values - insert information provided by spotify for developers
-Sys.setenv(SPOTIFY_CLIENT_ID = "cd7d988f8b034148bdcd921c804f6117")
-Sys.setenv(SPOTIFY_CLIENT_SECRET = "2ebdda53a31a4ef5828b31e947e179df")
+Sys.setenv(SPOTIFY_CLIENT_ID = "")
+Sys.setenv(SPOTIFY_CLIENT_SECRET = "")
 
 access_token <- get_spotify_access_token()
 
@@ -112,7 +112,7 @@ row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2021$track
 colnames(average_min_all)[colnames(average_min_all) == 'V1'] <- 'average_time'
 
 #I divide now every song by 60'000 to receive the average in Minutes. The average is now in milliseconds.
-
 average_min_all$average_time <- average_min_all$average_time / 60000
+
 
 
