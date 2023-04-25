@@ -2,11 +2,7 @@ library(tidyverse)
 library(httr)
 library(rvest)
 library(here)
-library(purr)
-install.packages()
-
-
-here::here()
+library(stringr)
 
 #WORLDBANK API
 
@@ -79,9 +75,12 @@ save(data_germany, file = "output/tables/germany_water_pdf.RData")
 
 #Download the pdf's
 
+#I wanted a code/loop that read every url from the data frames, downloads the pdf and then saves it in the pdf folder
+
 # Set the directory where you want to save the PDF files
 pdf_dir <- "output/pdf/"
 
+#I asked ChatGPT to create a loop as I didn't find any code 
 # Download the PDF files and save them to the specified directory
 for (i in seq_along(data_spain$PDF)) {
   # Get the filename from the URL
@@ -94,7 +93,10 @@ for (i in seq_along(data_spain$PDF)) {
   GET(data_spain$PDF[i], write_disk(output_path))
 }
 
+#The data frame contain several incomplete url therefore loop is not possible
 
+#I try to download the pdf from the correct url individually which works
 pdf_url <- "http://documents.worldbank.org/curated/en/740231468299931915/pdf/717440WP0Box370nNovember72011CYB0EE.pdf"
 download.file(pdf_url, dest_path, mode = "wb")
 dest_path <- "output/pdf/spain_water1.pdf"
+

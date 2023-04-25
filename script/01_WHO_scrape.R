@@ -53,4 +53,4 @@ response_filter <-  httr::GET(
 #finding a solution for an exact scraping so I decide to continue with the data frames provided by
 #WHO at https://platform.who.int/data/
 
-#CHATGPT was also used to find a solution but in general CHATGPT has not been a big help regarding API scrapping
+#CHATGPT was also used to find a solution but in general CHATGPT has not been a big help regarding API
