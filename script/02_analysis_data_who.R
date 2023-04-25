@@ -21,7 +21,6 @@ countries <- c("Spain", "Portugal", "Italy", "Germany", "France", "Sweden", "Nor
 # Use the subset() function to filter the data frame
 filter_air <- subset(data_who_air_death_total_2, Location %in% countries)
 
-
 # I create an overview with the different countries
 death_plot <- ggplot(filter_air, aes(x = Location, y = FactValueNumeric)) +
   geom_bar(stat = "identity")+
@@ -32,5 +31,4 @@ print(death_plot)
 
 # save the plot
 ggsave("output/plots/death_europe.png", width = 16, height = 9)
-
 
