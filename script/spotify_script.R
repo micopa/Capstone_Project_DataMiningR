@@ -120,8 +120,6 @@ colnames(average_min_all)[colnames(average_min_all) == 'V1'] <- 'average_time'
 average_min_all$average_time <- average_min_all$average_time / 60000
 
 
-
-
 #one data frame with all the track durations
 average_min_box <- data.frame(top100_2011$track.duration_ms) %>% 
   mutate(top100_2012$track.duration_ms) %>% 
@@ -155,4 +153,4 @@ average_min_box <- average_min_box / 60000
 boxplot(average_min_box, main="Boxplot Song Duration", xlab="Top 100 Year", ylab="Song duration in minutes")
 
 #I save the graph
-ggsave("output/plots/boxplot_time_top100.png", width = 16, height = 9)
+ggsave("output/plots/boxplot_time.png")
