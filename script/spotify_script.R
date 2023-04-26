@@ -6,14 +6,19 @@ library(spotifyr)
 library(ggridges)
 library(ggjoy)
 
+
 install.packages("ggjoy")
 
 #install.packages to use spotify wrapper
 install.packages("spotifyr")
 
+#Read the credentials to get the access token
+client_ID <- readLines("credentials/ID.txt", n = 1, warn = FALSE)
+api_key <- readLines("credentials/key.txt", n = 1, warn = FALSE)
+
 #set system values - insert information provided by spotify for developers
-Sys.setenv(SPOTIFY_CLIENT_ID = "")
-Sys.setenv(SPOTIFY_CLIENT_SECRET = "")
+Sys.setenv(SPOTIFY_CLIENT_ID = client_ID)
+Sys.setenv(SPOTIFY_CLIENT_SECRET = api_key)
 
 access_token <- get_spotify_access_token()
 
@@ -113,3 +118,42 @@ colnames(average_min_all)[colnames(average_min_all) == 'V1'] <- 'average_time'
 
 #I divide now every song by 60'000 to receive the average in Minutes. The average is now in milliseconds.
 average_min_all$average_time <- average_min_all$average_time / 60000
+
+
+
+
+#one data frame with all the track durations
+average_min_box <- data.frame(top100_2011$track.duration_ms) %>% 
+  mutate(top100_2012$track.duration_ms) %>% 
+  mutate(top100_2013$track.duration_ms) %>% 
+  mutate(top100_2014$track.duration_ms) %>% 
+  mutate(top100_2015$track.duration_ms) %>% 
+  mutate(top100_2016$track.duration_ms) %>% 
+  mutate(top100_2017$track.duration_ms) %>% 
+  mutate(top100_2018$track.duration_ms) %>% 
+  mutate(top100_2019$track.duration_ms) %>% 
+  mutate(top100_2020$track.duration_ms) %>% 
+  mutate(top100_2021$track.duration_ms)
+
+#change column names
+colnames(average_min_box)[colnames(average_min_box) == "top100_2011.track.duration_ms"] <- "time_2011"
+colnames(average_min_box)[colnames(average_min_box) == "top100_2012$track.duration_ms"] <- "time_2012"
+colnames(average_min_box)[colnames(average_min_box) == "top100_2013$track.duration_ms"] <- "time_2013"
+colnames(average_min_box)[colnames(average_min_box) == "top100_2014$track.duration_ms"] <- "time_2014"
+colnames(average_min_box)[colnames(average_min_box) == "top100_2015$track.duration_ms"] <- "time_2015"
+colnames(average_min_box)[colnames(average_min_box) == "top100_2016$track.duration_ms"] <- "time_2016"
+colnames(average_min_box)[colnames(average_min_box) == "top100_2017$track.duration_ms"] <- "time_2017"
+colnames(average_min_box)[colnames(average_min_box) == "top100_2018$track.duration_ms"] <- "time_2018"
+colnames(average_min_box)[colnames(average_min_box) == "top100_2019$track.duration_ms"] <- "time_2019"
+colnames(average_min_box)[colnames(average_min_box) == "top100_2020$track.duration_ms"] <- "time_2020"
+colnames(average_min_box)[colnames(average_min_box) == "top100_2021$track.duration_ms"] <- "time_2021"
+
+#Divide all the scores to have minutes
+average_min_box <- average_min_box / 60000
+
+#Create boxplot to see if there are outliers
+boxplot(average_min_box, main="Boxplot Song Duration", xlab="Top 100 Year", ylab="Song duration in minutes")
+
+#I save the graph
+ggsave("output/plots/boxplot_time_top100.png", width = 16, height = 9)
+png("output/plots/boxplot_time_top100.png")
