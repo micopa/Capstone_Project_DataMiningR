@@ -156,4 +156,3 @@ boxplot(average_min_box, main="Boxplot Song Duration", xlab="Top 100 Year", ylab
 
 #I save the graph
 ggsave("output/plots/boxplot_time_top100.png", width = 16, height = 9)
-png("output/plots/boxplot_time_top100.png")
