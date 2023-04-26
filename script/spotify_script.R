@@ -154,3 +154,10 @@ boxplot(average_min_box, main="Boxplot Song Duration", xlab="Top 100 Year", ylab
 
 #I save the graph
 ggsave("output/plots/boxplot_time.png")
+
+#I scrape spotify to know if there is a differentiation between genres in length
+#I only scrape for the most popular genres
+rock_playlist <- spotifyr::get_playlist_tracks("37i9dQZF1DX4vth7idTQch")
+hiphop_playlist <- spotifyr::get_playlist_tracks("37i9dQZF1DXbkfWVLd8wE3")
+reggaeton_classics <- spotifyr::get_playlist_tracks("75IFdPYlFXqjpZO4DY2aHK")
+
