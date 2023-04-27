@@ -31,5 +31,11 @@ Does climate change have a greater impact on southern European countries than on
 
 ## Ideas
 
+First, I thought about using the "rest" package to scrape a news article website like zeit.de or elpais.es about climate change policies in the respective countries. Then I thought about doing a sentiment analysis with the information I got. But the more I thought about it, the less it seemed like a good idea, as we were going to do a Guardian API scrape and a sentiment analysis in the group project anyway. 
+
+I thought about concentrating on the API as it seemed like a method I would be more likely to use in the future for my Master's thesis. I struggled to find a good API for environmental data. It was quite late in my project that I found the EEA API database. I haven't been able to try it out yet, but I think it could be useful in the future. 
+
+## Worldbank Database
+
 
 
