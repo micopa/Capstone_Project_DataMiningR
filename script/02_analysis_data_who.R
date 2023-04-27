@@ -8,8 +8,7 @@ here::here()
 # As stated in the scrape script filtering of the DATA using API was not possible
 # so I follow from here on with the data files provided directly from the WHO DATA site
 
-save(data_who_air_death_total, file = "data_who_air_total.RData")
-data_who_air_death_total<- read.csv("data_who_air_total.Rdata")
+data_who_air_death_total<- load("data/data_who_air_total.Rdata")
 
 data_who_air_death_total_2 <- select(data_who_air_death_total, "Location", "FactValueNumeric")
 
