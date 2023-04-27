@@ -4,7 +4,7 @@ author: "Miguel Corredera Payo (14-533-079)"
 date: "`r Sys.Date()`"
 output:
   prettydoc::html_pretty:
-    theme: Leonids
+    theme: Architect
     highlight: github
     toc: TRUE
   pdf_document:
@@ -35,7 +35,7 @@ First, I thought about using the "rest" package to scrape a news article website
 
 I thought about concentrating on the API as it seemed like a method I would be more likely to use in the future for my Master's thesis. I struggled to find a good API for environmental data. It was quite late in my project that I found the EEA API database. I haven't been able to try it out yet, but I think it could be useful in the future. 
 
-## Data scraping
+## Difficulties with data scraping
 ### Worldbank Database
 
 The World Bank has information on everything, including climate reports, environmental projects and more. 
@@ -133,6 +133,16 @@ As stated in the code both ways don't work. I have not found a solution for an e
 As you can see from the graph. France, Italy and Germany are particularly affected by air pollution, while the other countries on the graph are less affected. This is probably due to the fact that there are more regions with a high concentration of industry. 
 
 
+## Reorientation of the project
+
+At that point, I spent a lot of time scraping for data. After the failed attempt to scrape the WHO data filtered by the documentation, I rethought the goal of this project. 
+
+As can be seen above, I am now using this project to work on my scraping skills and to consolidate my R knowledge. So I thought I would use the first failed part as a kind of learning report and delve into the second part with an API that has good documentation or if possible even an R function. 
+
+At the beginning I thought of the openweather API. However, since only single calls can be made with the free version and therefore historical data over a certain period of time cannot be retrieved, I decide to use an API that has nothing to do with my topic, but which I will have fun working with and is easier to use. 
+
+This will be the spotifyr function.
+
+### Spotfiyr
 
 
- 

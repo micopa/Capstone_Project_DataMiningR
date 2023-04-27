@@ -14,7 +14,7 @@
 
 <meta name="date" content="2023-04-27" />
 
-<title>Class Excercise 2</title>
+<title>Capstone Project</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -148,7 +148,7 @@ code span.ot { color: #007020; }
 
 
 <section class="page-header">
-<h1 class="title toc-ignore project-name">Class Excercise 2</h1>
+<h1 class="title toc-ignore project-name">Capstone Project</h1>
 <h4 class="author project-author">Miguel Corredera Payo
 (14-533-079)</h4>
 <h4 class="date project-date">2023-04-27</h4>
@@ -158,13 +158,22 @@ code span.ot { color: #007020; }
 <div id="TOC" class="toc">
 <div class="toc-box">
 <ul>
-<li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="#introduction" id="toc-introduction">Introduction</a>
+<ul>
 <li><a href="#research-question" id="toc-research-question">Research
 Question</a></li>
 <li><a href="#ideas" id="toc-ideas">Ideas</a></li>
+</ul></li>
+<li><a href="#data-scraping" id="toc-data-scraping">Data scraping</a>
+<ul>
 <li><a href="#worldbank-database" id="toc-worldbank-database">Worldbank
 Database</a></li>
 <li><a href="#who-database" id="toc-who-database">WHO Database</a></li>
+</ul></li>
+<li><a href="#reorientation-of-the-project" id="toc-reorientation-of-the-project">Reorientation of the project</a>
+<ul>
+<li><a href="#spotfiyr" id="toc-spotfiyr">Spotfiyr</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
@@ -176,9 +185,8 @@ Database</a></li>
 University of Lucerne, spring semester 2023. The capstone project should
 reflect both the ability to apply data mining techniques in practice and
 the originality and relevance of the application.</p>
-</div>
-<div id="research-question" class="section level2">
-<h2>Research Question</h2>
+<div id="research-question" class="section level3">
+<h3>Research Question</h3>
 <p>For the capstone project the students were free to choose a topic and
 the data they wanted to use. Id would be of advantage if part of the
 code or the results used in the capstone project could be implemented in
@@ -202,8 +210,8 @@ climate change in Europe.</p>
 <p>Does climate change have a greater impact on southern European
 countries than on central and northern European countries?</p>
 </div>
-<div id="ideas" class="section level2">
-<h2>Ideas</h2>
+<div id="ideas" class="section level3">
+<h3>Ideas</h3>
 <p>First, I thought about using the “rest” package to scrape a news
 article website like zeit.de or elpais.es about climate change policies
 in the respective countries. Then I thought about doing a sentiment
@@ -216,8 +224,11 @@ struggled to find a good API for environmental data. It was quite late
 in my project that I found the EEA API database. I haven’t been able to
 try it out yet, but I think it could be useful in the future.</p>
 </div>
-<div id="worldbank-database" class="section level2">
-<h2>Worldbank Database</h2>
+</div>
+<div id="data-scraping" class="section level2">
+<h2>Data scraping</h2>
+<div id="worldbank-database" class="section level3">
+<h3>Worldbank Database</h3>
 <p>The World Bank has information on everything, including climate
 reports, environmental projects and more.</p>
 <p>I use the following code to try my first scrape on the Worldbank
@@ -270,8 +281,8 @@ the loop does not work.</p>
 <p>In my opinion, the available data from the World Bank is rather
 uninteresting and I therefore decide to use a new API.</p>
 </div>
-<div id="who-database" class="section level2">
-<h2>WHO Database</h2>
+<div id="who-database" class="section level3">
+<h3>WHO Database</h3>
 <p>WHO also provides an API to access its database. WHO also provides an
 API to access its database. Although the WHO focuses on health and
 disease, important data on the impact of climate change can also be
@@ -307,6 +318,27 @@ Europe</strong></p>
 particularly affected by air pollution, while the other countries on the
 graph are less affected. This is probably due to the fact that there are
 more regions with a high concentration of industry.</p>
+</div>
+</div>
+<div id="reorientation-of-the-project" class="section level2">
+<h2>Reorientation of the project</h2>
+<p>At that point, I spent a lot of time scraping for data. After the
+failed attempt to scrape the WHO data filtered by the documentation, I
+rethought the goal of this project.</p>
+<p>As can be seen above, I am now using this project to work on my
+scraping skills and to consolidate my R knowledge. So I thought I would
+use the first failed part as a kind of learning report and delve into
+the second part with an API that has good documentation or if possible
+even an R function.</p>
+<p>At the beginning I thought of the openweather API. However, since
+only single calls can be made with the free version and therefore
+historical data over a certain period of time cannot be retrieved, I
+decide to use an API that has nothing to do with my topic, but which I
+will have fun working with and is easier to use.</p>
+<p>This will be the spotifyr function.</p>
+<div id="spotfiyr" class="section level3">
+<h3>Spotfiyr</h3>
+</div>
 </div>
 </section>
 
