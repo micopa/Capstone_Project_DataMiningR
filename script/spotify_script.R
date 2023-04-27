@@ -6,6 +6,7 @@ library(spotifyr)
 library(ggridges)
 library(ggjoy)
 
+here::here()
 
 install.packages("ggjoy")
 
@@ -100,18 +101,24 @@ average_min <- data.frame(mean(top100_2011$track.duration_ms)) %>%
 #I turn the columns into rows
 average_min_all <- as.data.frame(t(average_min))
 
+#I create an additional column for the years. Makes it easier to create a graph. 
+year <- c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021)
+
+# Create a data frame with the the two columns
+average_min_all <- data.frame(year, average_min_all)
+
 #rename rows
-row.names(average_min_all)[row.names(average_min_all) == "mean.top100_2011.track.duration_ms."] <- "2011"
-row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2012$track.duration_ms)"] <- "2012"
-row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2013$track.duration_ms)"] <- "2013"
-row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2014$track.duration_ms)"] <- "2014"
-row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2015$track.duration_ms)"] <- "2015"
-row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2016$track.duration_ms)"] <- "2016"
-row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2017$track.duration_ms)"] <- "2017"
-row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2018$track.duration_ms)"] <- "2018"
-row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2019$track.duration_ms)"] <- "2019"
-row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2020$track.duration_ms)"] <- "2020"
-row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2021$track.duration_ms)"] <- "2021"
+row.names(average_min_all)[row.names(average_min_all) == "mean.top100_2011.track.duration_ms."] <- "1"
+row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2012$track.duration_ms)"] <- "2"
+row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2013$track.duration_ms)"] <- "3"
+row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2014$track.duration_ms)"] <- "4"
+row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2015$track.duration_ms)"] <- "5"
+row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2016$track.duration_ms)"] <- "6"
+row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2017$track.duration_ms)"] <- "7"
+row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2018$track.duration_ms)"] <- "8"
+row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2019$track.duration_ms)"] <- "9"
+row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2020$track.duration_ms)"] <- "10"
+row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2021$track.duration_ms)"] <- "11"
 
 #rename columns
 colnames(average_min_all)[colnames(average_min_all) == 'V1'] <- 'average_time'
@@ -119,6 +126,15 @@ colnames(average_min_all)[colnames(average_min_all) == 'V1'] <- 'average_time'
 #I divide now every song by 60'000 to receive the average in Minutes. The average is now in milliseconds.
 average_min_all$average_time <- average_min_all$average_time / 60000
 
+#Create a graph showing the time averages over the years
+ggplot(data = average_min_all, aes(x = year, y = average_time, group = 1)) +
+  geom_line(colour = "cyan", linetype = 7, size = 3) +
+  scale_x_continuous(breaks = year, expand = c(0,0)) +
+  labs(x = "Year", y = "Average Time", title = "Average time of the top 100 songs over years")+
+  theme(plot.margin = unit(c(1, 1, 2, 1), "lines"))  # Adjust the bottom margin
+
+#save the graph
+ggsave("output/plots/average_time_top100.png", width = 16, height = 9)
 
 #one data frame with all the track durations
 average_min_box <- data.frame(top100_2011$track.duration_ms) %>% 
@@ -164,4 +180,5 @@ reggaeton_classics <- spotifyr::get_playlist_tracks("75IFdPYlFXqjpZO4DY2aHK")
 dance_classics <- spotifyr::get_playlist_tracks("37i9dQZF1DX8a1tdzq5tbM")
 indie_classics <- spotifyr::get_playlist_tracks("37i9dQZF1DX26DKvjp0s9M")
 pop_classics <- spotifyr::get_playlist_tracks("13Jd6NS2kvaoVorVFi7luv")
+
 
