@@ -149,6 +149,7 @@ colnames(average_min_box)[colnames(average_min_box) == "top100_2021$track.durati
 #Divide all the scores to have minutes
 average_min_box <- average_min_box / 60000
 
+
 #Create boxplot to see if there are outliers
 boxplot(average_min_box, main="Boxplot Song Duration", xlab="Top 100 Year", ylab="Song duration in minutes")
 
@@ -160,4 +161,7 @@ ggsave("output/plots/boxplot_time.png")
 rock_playlist <- spotifyr::get_playlist_tracks("37i9dQZF1DX4vth7idTQch")
 hiphop_playlist <- spotifyr::get_playlist_tracks("37i9dQZF1DXbkfWVLd8wE3")
 reggaeton_classics <- spotifyr::get_playlist_tracks("75IFdPYlFXqjpZO4DY2aHK")
+dance_classics <- spotifyr::get_playlist_tracks("37i9dQZF1DX8a1tdzq5tbM")
+indie_classics <- spotifyr::get_playlist_tracks("37i9dQZF1DX26DKvjp0s9M")
+pop_classics <- spotifyr::get_playlist_tracks("13Jd6NS2kvaoVorVFi7luv")
 
