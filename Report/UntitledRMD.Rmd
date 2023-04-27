@@ -18,3 +18,18 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 ## Introduction
 
+This is a capstone project for the seminar "Data Mining in R" at the University of Lucerne, spring semester 2023. The capstone project should reflect both the ability to apply data mining techniques in practice and the originality and relevance of the application.
+
+## Research Question
+
+For the capstone project the students were free to choose a topic and the data they wanted to use. Id would be of advantage if part of the code or the results used in the capstone project could be implemented in a following paper or thesis the student might work on. In my case, I have no more papers due for my Master's degree and the only open paper is my Master Thesis, which I will be starting with next semester. For the moment I have still not decided what will be the research question I will want to answer with my thesis, but I know, that the research will be done in the field of political science and most probalby around the topics European Union and climate policy. 
+
+I would also like to mention that this is the second time I have attended a seminar on R Studio. My goal for this seminar was simply to learn additional skills with R and to learn new ways to collect data from the web. I would describe my R Studio skills as quite basic. I have done a few plots here and there and one or two regression analyses for a paper. Other than that, I'd say I'm still at the beginning of my learning curve with this program and language. 
+As a result of the above situation regarding my Master's thesis and the state of my studio skills, I wanted to focus on a fairly basic research question regarding climate change in Europe. 
+
+Does climate change have a greater impact on southern European countries than on central and northern European countries?
+
+## Ideas
+
+
+

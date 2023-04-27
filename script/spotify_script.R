@@ -85,8 +85,18 @@ top100_2019 <- get_playlist_tracks("37i9dQZF1DWVRSukIED0e9")
 top100_2020 <- get_playlist_tracks("2fmTTbBkXi8pewbUvG3CeZ")
 top100_2021 <- get_playlist_tracks("5GhQiRkGuqzpWZSE7OU4Se")
 
+#I create one data frame with all the averages over the last 11 years
+average_min <- data.frame()
+
+for (i in 2011:2021) {
+  df <- data.frame(year = i, mean_duration = mean(get(paste0("top100_", i))$track.duration_ms))
+  average_min <- rbind(average_min, df)
+}
+
+##OLD Code----------------
+
 #I create one data frame with all the averages over the last 11 years 
-average_min <- data.frame(mean(top100_2011$track.duration_ms)) %>% 
+average_min_2 <- data.frame(mean(top100_2011$track.duration_ms)) %>% 
   mutate(mean(top100_2012$track.duration_ms)) %>% 
   mutate(mean(top100_2013$track.duration_ms)) %>% 
   mutate(mean(top100_2014$track.duration_ms)) %>% 
@@ -101,12 +111,6 @@ average_min <- data.frame(mean(top100_2011$track.duration_ms)) %>%
 #I turn the columns into rows
 average_min_all <- as.data.frame(t(average_min))
 
-#I create an additional column for the years. Makes it easier to create a graph. 
-year <- c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021)
-
-# Create a data frame with the the two columns
-average_min_all <- data.frame(year, average_min_all)
-
 #rename rows
 row.names(average_min_all)[row.names(average_min_all) == "mean.top100_2011.track.duration_ms."] <- "1"
 row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2012$track.duration_ms)"] <- "2"
@@ -120,14 +124,22 @@ row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2019$track
 row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2020$track.duration_ms)"] <- "10"
 row.names(average_min_all)[row.names(average_min_all) == "mean(top100_2021$track.duration_ms)"] <- "11"
 
+#I create an additional column for the years. Makes it easier to create a graph. 
+year <- c(2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021)
+
+# Create a data frame with the the two columns
+average_min_all <- data.frame(year, average_min_all)
+
+##Create Graph for average Time------
+
 #rename columns
-colnames(average_min_all)[colnames(average_min_all) == 'V1'] <- 'average_time'
+colnames(average_min)[colnames(average_min) == 'mean_duration'] <- 'average_time'
 
 #I divide now every song by 60'000 to receive the average in Minutes. The average is now in milliseconds.
-average_min_all$average_time <- average_min_all$average_time / 60000
+average_min$average_time <- average_min$average_time / 60000
 
 #Create a graph showing the time averages over the years
-ggplot(data = average_min_all, aes(x = year, y = average_time, group = 1)) +
+ggplot(data = average_min, aes(x = year, y = average_time, group = 1)) +
   geom_line(colour = "cyan", linetype = 7, size = 3) +
   scale_x_continuous(breaks = year, expand = c(0,0)) +
   labs(x = "Year", y = "Average Time", title = "Average time of the top 100 songs over years")+
