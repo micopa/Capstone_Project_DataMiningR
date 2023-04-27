@@ -174,11 +174,34 @@ ggsave("output/plots/boxplot_time.png")
 
 #I scrape spotify to know if there is a differentiation between genres in length
 #I only scrape for the most popular genres
-rock_playlist <- spotifyr::get_playlist_tracks("37i9dQZF1DX4vth7idTQch")
-hiphop_playlist <- spotifyr::get_playlist_tracks("37i9dQZF1DXbkfWVLd8wE3")
+rock_classics <- spotifyr::get_playlist_tracks("37i9dQZF1DX4vth7idTQch")
+hiphop_classics <- spotifyr::get_playlist_tracks("37i9dQZF1DXawlg2SZawZf")
 reggaeton_classics <- spotifyr::get_playlist_tracks("75IFdPYlFXqjpZO4DY2aHK")
 dance_classics <- spotifyr::get_playlist_tracks("37i9dQZF1DX8a1tdzq5tbM")
 indie_classics <- spotifyr::get_playlist_tracks("37i9dQZF1DX26DKvjp0s9M")
 pop_classics <- spotifyr::get_playlist_tracks("13Jd6NS2kvaoVorVFi7luv")
 
+#Create one data frame with all the genres
+genre_averages <- data.frame(rock_classics$track.duration_ms) %>% 
+  mutate(hiphop_classics$track.duration_ms) %>% 
+  mutate(reggaeton_classics$track.duration_ms) %>% 
+  mutate(dance_classics$track.duration_ms) %>% 
+  mutate(indie_classics$track.duration_ms) %>% 
+  mutate(pop_classics$track.duration_ms)
 
+#change column names
+colnames(genre_averages)[colnames(genre_averages) == "rock_classics.track.duration_ms"] <- "Rock"
+colnames(genre_averages)[colnames(genre_averages) == "hiphop_classics$track.duration_ms"] <- "Hiphop/Rap"
+colnames(genre_averages)[colnames(genre_averages) == "reggaeton_classics$track.duration_ms"] <- "Reggaeton"
+colnames(genre_averages)[colnames(genre_averages) == "dance_classics$track.duration_ms"] <- "Dance"
+colnames(genre_averages)[colnames(genre_averages) == "indie_classics$track.duration_ms"] <- "Indie"
+colnames(genre_averages)[colnames(genre_averages) == "pop_classics$track.duration_ms"] <- "Pop"
+
+#Divide all the scores to have minutes
+genre_averages <- genre_averages / 60000
+
+#Create boxplot to see how the differentiation between the genres 
+boxplot(genre_averages, main="Song duration of classic songs in different genres", xlab="Classic Songs", ylab="Song duration in minutes")
+
+#I save the graph
+ggsave("output/plots/boxplot_genre.png")
