@@ -4,7 +4,7 @@
 ***
 This project is carried out within the course Data Mining in R at the University of Lucerne.
 
-## Technologies
+## Packages
 ***
 In this project I used R in RStudio and tried different APIs as well as packages including the Worldbank and WHO API and the packages "spotifyr", "ggjoy" and "ggridges".
 
