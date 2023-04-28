@@ -4,7 +4,7 @@ author: "Miguel Corredera Payo (14-533-079)"
 date: "`r Sys.Date()`"
 output:
   prettydoc::html_pretty:
-    theme: Architect
+    theme: cayman
     highlight: github
     toc: TRUE
   pdf_document:
@@ -141,8 +141,85 @@ As can be seen above, I am now using this project to work on my scraping skills 
 
 At the beginning I thought of the openweather API. However, since only single calls can be made with the free version and therefore historical data over a certain period of time cannot be retrieved, I decide to use an API that has nothing to do with my topic, but which I will have fun working with and is easier to use. 
 
-This will be the spotifyr function.
+This will be the spotifyr package.
 
-### Spotfiyr
+### Spotfiyr package
+
+## Danceability
+
+As mentioned before, I want to use this project as a learning report and so in the next section I will discuss both the codes used and their results. 
+
+Via the Artist ID, you get a table with all the songs that are contained in your albums. I need this data to create a graph that shows the 10 best songs by Bad Bunny to dance to. 
+
+![**Top 10 danceable of Bad Bunny's songs **](../output/plots/top_ten_dancegraph.png)
+This makes me curious to know how the danceability of his albums develops over the course of his career. Especially knowing that his background is in HipHop and Rap. 
+
+I create a graph using the packages "ggridges" and "ggjoy". 
+
+```{r eval=FALSE, echo=TRUE, eval=FALSE, include=TRUE}
+bad_bunny %>% 
+  group_by(album_name) %>% 
+  ggplot(aes(danceability, album_name, fill = ..x..))+
+  geom_density_ridges_gradient()+ 
+  xlab("Danceability") +
+  ylab("Album")
+```
+
+
+YHLQMDLG is the album he most focused on reggaeton. As seen in the graph the danceability is quite high over the whole album. His last album on the other side has more up and downs. A mix of slow and danceable songs. 
+
+![**Danceability of Bad Bunny's albums**](../output/plots/danceability_albums_bunny.png)
+
+## Average duration
+
+As streaming services such as Spotify and Apple Music become more popular, it has been rumoured that artists are considering making shorter songs to get more plays.
+
+After scraping the database for information on the top 100 playlists from 2011-2021. Then I mutate all the duration columns into a data frame. In the code you can see that I used the "mutate" function first. After reviewing our seminar slides, I created an a loop. As the song duration is given in miliseconds, I divide it by 60'000 to get the minutes.  
+
+```{r eval=FALSE, echo=TRUE, eval=FALSE, include=TRUE}
+#I create one data frame with all the averages over the last 11 years
+average_min <- data.frame()
+
+for (i in 2011:2021) {
+  df <- data.frame(year = i, mean_duration = mean(get(paste0("top100_", i))$track.duration_ms))
+  average_min <- rbind(average_min, df)
+}
+```
+
+As can be seen in the graph below the average song duration decreases from over 3.8 min to under 3.3 from 2011-2021. 
+
+![**Average song duration top 100 from 2011-2021**](../output/plots/average_time_top100.png)
+
+To see if there are any outliers that could have a significant impact on the averages, I create box plots. 
+
+Here again, I am making progress with the coding. First I used the following code to rename columns. 
+
+Here again, I am making progress with the coding. First I renamed each column manually, later I tried again to create a loop, which worked. 
+
+```{r eval=FALSE, echo=TRUE, eval=FALSE, include=TRUE}
+#New renaming loop 
+for (year in 2011:2021) {
+  colnames(average_min_box)[colnames(average_min_box) == paste0("top100_", year, "$track.duration_ms")] <- paste0(year)
+}
+```
+
+As can be seen, although there are some outliers at the beginning of the decade, the median time is also higher than at the beginning of the next decade. This shows that songs are indeed getting shorter. 
+
+![**Boxplot for the top 100 playlists from 2011 - 2021**](../output/plots/boxplot_time.png)
+
+The last thing that I want to know is, if between the genres there is a difference in song duration. For that I scrape the API for playlist with classic songs for some of the most popular genres. As can be seen in reggaeton there is just one outlier with more than 5 minutes otherwise the majority of the songs is around 4 minutes. Where we see more outliers, is in the dance category. This is probably due to some house and techno songs being quite long. 
+
+
+![**Boxplot genre classics**](../output/plots/boxplot_genres.png)
+
+
+## Conclusion
+
+From a scientific point of view, this project did not make much of a contribution. It is also a pity that I could not continue to scrape for data that could be useful for my Master's thesis. However, from my personal point of view, this project has given me additional confidence in working with R Studio and APIs. In the future, I will most likely draw on this newly gained knowledge. 
+
+
+
+
+
 
 
