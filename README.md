@@ -1,4 +1,4 @@
-# Data Mining in R | Capstone Project by Ursulina Kölbener
+# Data Mining in R | Capstone Project
 
 ## General Info
 ***
